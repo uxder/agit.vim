@@ -204,10 +204,10 @@ function s:get_git_root(basedir)
   let cwd = getcwd()
   execute cdcmd . current_path
   if s:Process.has_vimproc()
-    let toplevel_path = vimproc#system('git --no-pager rev-parse --show-toplevel')
+    let toplevel_path = vimproc#system('git rev-parse --show-toplevel')
     let has_error = vimproc#get_last_status() != 0
   else
-    let toplevel_path = system('git --no-pager rev-parse --show-toplevel')
+    let toplevel_path = system('git rev-parse --show-toplevel')
     let has_error = v:shell_error != 0
   endif
   execute cdcmd . cwd
@@ -228,14 +228,15 @@ function! s:get_git_dir(basedir)
   else
     let current_path = a:basedir
   endif
+  
   let cdcmd = haslocaldir() ? 'lcd ' : 'cd '
   let cwd = getcwd()
   execute cdcmd . current_path
   if s:Process.has_vimproc()
-    let toplevel_path = vimproc#system('git --no-pager rev-parse --show-toplevel')
+    let toplevel_path = vimproc#system('git rev-parse --show-toplevel')
     let has_error = vimproc#get_last_status() != 0
   else
-    let toplevel_path = system('git --no-pager rev-parse --show-toplevel')
+    let toplevel_path = system('git rev-parse --show-toplevel')
     let has_error = v:shell_error != 0
   endif
   execute cdcmd . cwd
